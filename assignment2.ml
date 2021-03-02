@@ -14,15 +14,15 @@ let rec zipwith f l1 l2 =
   | [] -> []
   | (h::t) -> (match l2 with
     | [] -> []
-    | (h2::t2) -> (f h h2)::(zipwith f t t2))
+    | (h2::t2) -> (f h h2)::(zipwith f t t2)) ;;
 
 let buckets p l =
   []
 
 let fib_tailrec n =
   let rec helper curr prev z n =
-    if z=n then curr else helper (curr+prev) curr (z+1) n
-  helper 0 1 0 n
+    if z=n then curr else helper (curr+prev) curr (z+1) n in
+  helper 0 1 0 n ;;
 
 let assoc_list lst =
   []
