@@ -20,7 +20,9 @@ let buckets p l =
   []
 
 let fib_tailrec n =
-  0
+  let rec helper curr prev z n =
+    if z=n then curr else helper (curr+prev) curr (z+1) n
+  helper 0 1 0 n
 
 let assoc_list lst =
   []
