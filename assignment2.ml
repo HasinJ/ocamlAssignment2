@@ -7,10 +7,14 @@ match l with
 
 
 let rec n_times (f, n, v) =
-  0
+  if n=0 then v else n_times(f,n-1,(f v))
 
 let rec zipwith f l1 l2 =
-  []
+  match l1 with
+  | [] -> []
+  | (h::t) -> (match l2 with
+    | [] -> []
+    | (h2::t2) -> (f h h2)::(zipwith f t t2))
 
 let buckets p l =
   []
