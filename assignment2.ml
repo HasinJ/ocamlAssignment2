@@ -5,7 +5,6 @@ match l with
   | [] -> []
   | (h::t) -> if (f h) then (h::h::(cond_dup t f)) else (cond_dup t f) ;;
 
-
 let rec n_times (f, n, v) =
   if n=0 then v else n_times(f,n-1,(f v))
 
@@ -16,8 +15,60 @@ let rec zipwith f l1 l2 =
     | [] -> []
     | (h2::t2) -> (f h h2)::(zipwith f t t2)) ;;
 
+(*
+let rec helper p curr lst =
+  match lst with
+  | [] -> []
+  | (h2::t2) -> if (p curr h2) then h2::(helper p curr t2) else helper p curr t2 in
+
+let rec helper2 original first f tail =
+  match l with
+  | [] -> [] @ original
+  | (h2::t2) -> if (f first h2) then h2::(helper2 (remove original h2) first f t2) else helper2 original first f t2 in
+
+let rec helper p curr lst =
+  match lst with
+  | [] -> []
+  | (h2::t2) -> if (p curr h2) then h2::(helper p curr t2) else helper p curr t2 in
+
+let rec helper2 p l =
+  match l with
+  | [] -> []
+  | h::t -> (h::(helper p h t)::[]) @ (helper2 )
+
+ - check for empty, if it is then skip
+ - try passing a different thing other than [[]]
+ - try rverse technique tail rec
+*)
+
 let buckets p l =
-  []
+
+  let rec helper p curr lst =
+    match lst with
+    | [] -> []
+    | (h2::t2) -> if (p curr h2) then h2::(helper p curr t2) else helper p curr t2 in
+
+  let rec remove x a =
+    match a with
+    | [] -> []
+    | h::t -> if h = x then t else h::(remove x t) in
+
+  let rec removeAll lst1 lst2 =
+    match lst1 with
+    | [] -> lst2
+    | h::t -> removeAll t (remove h lst2) in
+
+  let rec main p l total =
+    match l with
+    | [] -> total
+    | (h::t2) -> main p (removeAll (h::(helper p h t2)) t2) ((h::(helper p h t2))::total) in
+
+  let rec reverse l a =
+    match l with
+    | [] -> a
+    | (h::t) -> reverse t (h::a) in
+
+  reverse (main p l []) [] ;;
 
 let fib_tailrec n =
   let rec helper curr prev z n =
@@ -25,7 +76,7 @@ let fib_tailrec n =
   helper 0 1 0 n ;;
 
 let assoc_list lst =
-  []
+  
 
 let ap fs args =
   []
