@@ -76,7 +76,19 @@ let fib_tailrec n =
   helper 0 1 0 n ;;
 
 let assoc_list lst =
-  
+
+  let counter num lest =
+    List.fold_left (fun a x -> if num=x then a+1 else a) 0 lest in
+
+  let duplicates lest =
+    List.fold_left (fun a h -> if ((counter h lest)>0) then (if ((counter h a)=0) then h::a else a) else h::a) [] lest in
+
+  let count lest =
+    let set = duplicates lest in
+    List.map (fun h -> (h,counter h lest)) set in
+
+  count lst;;
+
 
 let ap fs args =
   []
