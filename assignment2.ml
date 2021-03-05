@@ -98,7 +98,7 @@ let assoc_list lst =
 
 let ap fs args =
   let lst = List.map (fun x -> List.map x args) fs in
-  List.fold_left (fun a h -> h@a) [] lst ;;
+  List.fold_left (fun a h -> a@h) [] lst ;;
 
 (********)
 (* Done *)
