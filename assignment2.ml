@@ -1,12 +1,15 @@
 open List
 
+
 let rec cond_dup l f =
 match l with
   | [] -> []
   | (h::t) -> if (f h) then (h::h::(cond_dup t f)) else (cond_dup t f) ;;
 
+
 let rec n_times (f, n, v) =
   if n=0 then v else n_times(f,n-1,(f v))
+
 
 let rec zipwith f l1 l2 =
   match l1 with
@@ -14,6 +17,7 @@ let rec zipwith f l1 l2 =
   | (h::t) -> (match l2 with
     | [] -> []
     | (h2::t2) -> (f h h2)::(zipwith f t t2)) ;;
+
 
 (*
 let rec helper p curr lst =
@@ -70,10 +74,12 @@ let buckets p l =
 
   reverse (main p l []) [] ;;
 
+
 let fib_tailrec n =
   let rec helper curr prev z n =
     if z=n then curr else helper (curr+prev) curr (z+1) n in
   helper 0 1 0 n ;;
+
 
 let assoc_list lst =
 
@@ -91,7 +97,8 @@ let assoc_list lst =
 
 
 let ap fs args =
-  []
+  let lst = List.map (fun x -> List.map x args) fs in
+  List.fold_left (fun a h -> h@a) [] lst ;;
 
 (********)
 (* Done *)
